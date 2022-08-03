@@ -1,0 +1,34 @@
+version: '3.1'
+services:
+  frontend:
+    image: frontend-heroes
+    restart: always
+    ports:
+      - "4200:4200"
+    depends_on: 
+      - backend
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      TZ: America/Sao Paulo
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_ROOT_HOST: root
+      MARIADB_USER: root
+      MARIADB_PASSWORD: root
+      MARIADB_DATABASE: heroesdb
+    ports: 
+      - "3306:3306"
+    volumes:
+      - mariadb-db:/var/lib/mysql
+  backend:
+    image: heroes
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+volumes:
+     mariadb-db:
+    
+
