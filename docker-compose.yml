@@ -4,8 +4,8 @@ services:
     image: frontend-heroes
     restart: always
     ports:
-      - "4200:4200"
-    depends_on: 
+      - "80:80"
+    depends_on:
       - backend
   db:
     image: mariadb
@@ -17,7 +17,7 @@ services:
       MARIADB_USER: root
       MARIADB_PASSWORD: root
       MARIADB_DATABASE: heroesdb
-    ports: 
+    ports:
       - "3306:3306"
     volumes:
       - mariadb-db:/var/lib/mysql
@@ -29,6 +29,4 @@ services:
     depends_on:
       - db
 volumes:
-     mariadb-db:
-    
-
+  mariadb-db:
